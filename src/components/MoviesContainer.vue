@@ -10,25 +10,47 @@ export default {
     return {
       store,
     }
-  }
+  },
 }
 </script>
 
 
 <template>
-  <div class="card-container d-flex gap-4">
-    <div class="row row-cols-5 g-3 gap-3">
-      <div class="card rounded-0 border-0 m-auto" v-for="movie in store.movies" :key="movie.id">
-        <img :src="`http://image.tmdb.org/t/p/w500/${movie.poster_path}`">
-        <div class="overlay p-3">
-          <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ movie.title }}</div>
-          <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> <lang-flag :iso="movie.original_language"/></div>
-          <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag iso=""/> </div>
-          <div class="fw-bold fs-4 text-center"><span class="text-danger">Voto:</span> {{ movie.vote_average }}</div>
+  <main>
+    <div class="card-container">
+      <h1 class="text-danger fw-bold text-center">FILM</h1>
+      <div class="d-flex gap-4 mt-5">
+        <div class="row row-cols-6 g-3 gap-3">
+          <div class="card rounded-0 border-0 m-auto" v-for="movie in store.movies">
+            <img :src="`http://image.tmdb.org/t/p/w342/${movie.poster_path}`">
+            <div class="overlay">
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ movie.title }}</div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ movie.original_title }} </div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="movie.original_language"/></div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Voto:</span> </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="card-container">
+      <h1 class="text-danger fw-bold text-center">SERIE TV</h1>
+      <div class="d-flex gap-4 mt-5">
+        <div class="row row-cols-6 g-3 gap-3">
+          <div class="card rounded-0 border-0 m-auto" v-for="tvSerie in store.tvSeries">
+            <img :src="`http://image.tmdb.org/t/p/w500/${tvSerie.poster_path}`">
+            <div class="overlay">
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ tvSerie.title }}</div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ tvSerie.original_title }} </div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="tvSerie.original_language"/></div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Voto:</span> {{ tvSerie.vote_average }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 
 
@@ -36,34 +58,40 @@ export default {
 @use '../styles/partials/variables' as *;
 @use '../styles/partials/mixins' as *;
 
-.card-container {
-  padding: 3rem;
-  margin: 0 300px;
+main {
+  padding: 8rem;
 
-  .card {
-    background-color: transparent;
+  .card-container {
+    margin-bottom: 4rem;
 
-    img {
-      height: 100%;
+    h1 {
+      font-size: 60px;
     }
-    .overlay {
-      background-color: rgba(255, 255, 255, 0.5);
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.4s ease-in-out;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      backdrop-filter: blur(5px);
-    }
+    .card {
+      background-color: transparent;
 
-    &:hover {
-      .overlay {
-        opacity: 1;
+      img {
+        height: 100%;
       }
-    } 
+      .overlay {
+        background-color: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      &:hover {
+        .overlay {
+          opacity: 1;
+        }
+      } 
+    }
   }
 }
 </style>
