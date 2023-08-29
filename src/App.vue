@@ -15,12 +15,8 @@ export default {
 
 
 <template>
-  <nav>
-    <TheHeader></TheHeader>
-  </nav>  
-  <main>
-    <MoviesContainer></MoviesContainer>
-  </main>
+  <TheHeader></TheHeader>
+  <MoviesContainer></MoviesContainer>
 </template>
 
 

@@ -1,6 +1,6 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
-import { store } from '../store';
+import { store, getValutation } from '../store';
 
 export default {
   components: {
@@ -11,6 +11,9 @@ export default {
       store,
     }
   },
+  methods: {
+    getValutation,
+  }
 }
 </script>
 
@@ -26,8 +29,13 @@ export default {
             <div class="overlay">
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ movie.title }}</div>
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ movie.original_title }} </div>
-              <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="movie.original_language"/></div>
-              <div class="fw-bold fs-4 text-center"><span class="text-danger">Voto:</span> </div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="movie.original_language" /></div>
+              <div class="fw-bold fs-4 text-center">
+                <span class="text-danger">Voto:</span>
+                <div class="stars-outer">
+                  <div class="stars-inner" :style="`width: ${getValutation(movie.vote_average)}`"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -43,8 +51,13 @@ export default {
             <div class="overlay">
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ tvSerie.title }}</div>
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ tvSerie.original_title }} </div>
-              <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="tvSerie.original_language"/></div>
-              <div class="fw-bold fs-4 text-center"><span class="text-danger">Voto:</span> {{ tvSerie.vote_average }}</div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="tvSerie.original_language" /></div>
+              <div class="fw-bold fs-4 text-center">
+                <span class="text-danger">Voto:</span>
+                <div class="stars-outer">
+                  <div class="stars-inner" :style="`width: ${getValutation(tvSerie.vote_average)}`"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -67,12 +80,14 @@ main {
     h1 {
       font-size: 60px;
     }
+
     .card {
       background-color: transparent;
 
       img {
         height: 100%;
       }
+
       .overlay {
         background-color: rgba(255, 255, 255, 0.5);
         position: absolute;
@@ -90,8 +105,31 @@ main {
         .overlay {
           opacity: 1;
         }
-      } 
+      }
     }
   }
-}
-</style>
+
+  .stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+  }
+
+  .stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+  }
+
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+
+  .stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: #f8ce0b;
+  }
+}</style>

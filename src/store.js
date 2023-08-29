@@ -17,10 +17,9 @@ export function fetchMovie() {
     }
   }).then((response) => {
     store.movies = response.data.results;
-
-    console.log(store.searchTitle)
   });
 
+  
   const urlTv = "https://api.themoviedb.org/3/search/tv"
 
   axios.get(urlTv, {
@@ -30,7 +29,14 @@ export function fetchMovie() {
     }
   }).then((response) => {
     store.tvSeries = response.data.results;
-
-    console.log(store.searchTitle)
   });
+}
+
+export function getValutation(vote) {
+  const voteNum = parseFloat(vote);
+  const ratings = voteNum / 2;
+  const starNumbers = 5;
+  const starPercentage = (ratings / starNumbers) * 100;
+  const starPercentageString = `${(Math.round(starPercentage / 10) * 10)}%`;
+  return starPercentageString
 }
