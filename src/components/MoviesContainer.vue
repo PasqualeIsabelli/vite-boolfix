@@ -49,8 +49,8 @@ export default {
           <div class="card rounded-0 border-0 m-auto" v-for="tvSerie in store.tvSeries">
             <img :src="`http://image.tmdb.org/t/p/w500/${tvSerie.poster_path}`">
             <div class="overlay">
-              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ tvSerie.title }}</div>
-              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ tvSerie.original_title }} </div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ tvSerie.name }}</div>
+              <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ tvSerie.original_name }} </div>
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Lingua:</span> <lang-flag :iso="tvSerie.original_language" /></div>
               <div class="fw-bold fs-4 text-center">
                 <span class="text-danger">Voto:</span>
