@@ -19,7 +19,7 @@ export function fetchMovie() {
     store.movies = response.data.results;
   });
 
-  
+
   const urlTv = "https://api.themoviedb.org/3/search/tv"
 
   axios.get(urlTv, {
@@ -39,4 +39,11 @@ export function getValutation(vote) {
   const starPercentage = (ratings / starNumbers) * 100;
   const starPercentageString = `${(Math.round(starPercentage / 10) * 10)}%`;
   return starPercentageString
+}
+
+export function getImage(img) {
+  if (img === null) {
+    return "https://www.popcorn.app/assets/app/images/placeholder-movieimage.png"
+  }
+  return `http://image.tmdb.org/t/p/w500/` + img
 }

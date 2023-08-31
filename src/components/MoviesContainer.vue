@@ -1,6 +1,6 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
-import { store, getValutation } from '../store';
+import { store, getValutation, getImage } from '../store';
 
 export default {
   components: {
@@ -13,6 +13,7 @@ export default {
   },
   methods: {
     getValutation,
+    getImage
   }
 }
 </script>
@@ -25,7 +26,7 @@ export default {
       <div class="d-flex gap-4 mt-5">
         <div class="row row-cols-6 g-3 gap-3">
           <div class="card rounded-0 border-0 m-auto" v-for="movie in store.movies">
-            <img :src="`http://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+            <img :src="getImage(movie.poster_path)">
             <div class="overlay">
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ movie.title }}</div>
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ movie.original_title }} </div>
@@ -47,7 +48,7 @@ export default {
       <div class="d-flex gap-4 mt-5">
         <div class="row row-cols-6 g-3 gap-3">
           <div class="card rounded-0 border-0 m-auto" v-for="tvSerie in store.tvSeries">
-            <img :src="`http://image.tmdb.org/t/p/w500/${tvSerie.poster_path}`">
+            <img :src="getImage(tvSerie.poster_path)">
             <div class="overlay">
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo:</span> {{ tvSerie.name }}</div>
               <div class="fw-bold fs-4 text-center"><span class="text-danger">Titolo originale:</span> {{ tvSerie.original_name }} </div>
